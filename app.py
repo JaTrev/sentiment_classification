@@ -87,7 +87,7 @@ def training_results():
 
     with st.expander("Specialized BERT"):
         title = "Specialized BERT"
-        body = "textitest"
+        body = "text"
 
         markdown_text(title, text_class=TextTypes.Title)
         markdown_text(body, text_class=TextTypes.Text)
