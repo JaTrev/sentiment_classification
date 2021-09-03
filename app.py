@@ -58,21 +58,34 @@ def introduction():
     _, col_mid, _ = st.columns([1, 6, 1])
 
     with col_mid:
-        intro_text = 'intro tex'
+        intro_text = 'Sentiment analysis is the process of identifying and classifying text based on its emotion. ' \
+                     'It is often used in social media mentoring to give qualitative insights into a product or topic.'
+        markdown_text(intro_text, TextTypes.Text)
+
+        intro_text = 'This project looks at three different sentiment classifiers: ' \
+                     'VADER, a pre-trained BERTSequenceClassifier, ' \
+                     'and a self-created classifier based on a pre-trained BERT language model.'
+        markdown_text(intro_text, TextTypes.Text)
+
+        intro_text = 'All models are tested on the Sentiment140 data set. ' \
+                     'The data set includes 1.6 million tweets, each tweet is labeled by its sentiment ' \
+                     '(negative, neutral, positive).'
         markdown_text(intro_text, TextTypes.Text)
 
 
 def training_results():
-    with st.expander("VADE"):
+    with st.expander("VADER"):
+        markdown_text("VADER", text_class=TextTypes.Title)
 
-        title = "VADER"
-        body = "textitest"
+        body = "VADER (Valence Aware Dictionary and Sentiment Reasoner) " \
+               "is a common sentiment analysis tool that is based on rules and a lexicon. " \
+               "It works best with social media text."
+        markdown_text(body, text_class=TextTypes.Text)
 
-        markdown_text(title, text_class=TextTypes.Title)
+        body = 'This model was able to predict <b> 50 % </b> of the tweet sentiment correctly'
         markdown_text(body, text_class=TextTypes.Text)
 
     with st.expander("Specialized BERT"):
-
         title = "Specialized BERT"
         body = "textitest"
 
@@ -81,14 +94,14 @@ def training_results():
 
     with st.expander("Own Model"):
         title = "Own Model"
-        body = "textitest"
-
+        body = "has no neutral... acc = 0.83"
         markdown_text(title, text_class=TextTypes.Title)
         markdown_text(body, text_class=TextTypes.Text)
 
+        st.image("images/train.jpg", caption="Figure shows the accuracy and loss scores over training time.")
+
 
 def interactive_section():
-
     user_input = st.text_input("Type in input for sentiment classification", value="I love data.", max_chars=50, )
 
     model_type = st.radio("What model should be used?", options=["VADER", "Specialized BERT", "Own Model"])
@@ -96,7 +109,6 @@ def interactive_section():
     return user_input, model_type
 
 
-def show_result(model_name: str, user_input: str, sentiment: str):
+def show_result(model_name: str, sentiment: str):
     st.markdown(f""" <div align="center"> {model_name} classifies the input to be <b> {sentiment} </b>. </div> """,
                 unsafe_allow_html=True)
-
