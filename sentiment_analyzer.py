@@ -44,7 +44,7 @@ def get_model(model_type: str, transformers_model_name: str = "bert-base-uncased
 
         bert_model = TFAutoModel.from_pretrained(transformers_model_name, output_hidden_states=True)
         own_model = define_model(bert_model)
-        own_model.load_weights('own_weights.h5')
+        own_model.load_weights('data/own_weights.h5')
 
         return own_model
 
